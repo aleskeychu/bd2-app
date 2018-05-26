@@ -2,7 +2,7 @@ package ru.ifmo.basecourse.repository;
 
 import org.springframework.data.neo4j.annotation.Depth;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
-import ru.ifmo.basecourse.dto.neo4j.BinaryOperation;
+import ru.ifmo.basecourse.dto.neo4j.TreeBinaryOperation;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import java.util.List;
  * Date: 26-May-18.
  */
 
-public interface OperationRepository extends Neo4jRepository<BinaryOperation, Long> {
+public interface OperationRepository extends Neo4jRepository<TreeBinaryOperation, Long> {
 
     @Depth(-1)
-    List<BinaryOperation> findAllByIsRoot(boolean root);
+    List<TreeBinaryOperation> findAllByIsRoot(boolean root);
 }
