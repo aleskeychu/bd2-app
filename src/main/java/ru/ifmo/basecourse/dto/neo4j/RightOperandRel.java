@@ -12,25 +12,25 @@ public class RightOperandRel {
     @Id
     private Long id;
 
-    public BinaryOperation getParentOperation() {
+    public TreeBinaryOperation getParentOperation() {
         return parentOperation;
     }
 
-    public void setParentOperation( BinaryOperation parentOperation ) {
+    public void setParentOperation( TreeBinaryOperation parentOperation ) {
         this.parentOperation = parentOperation;
     }
 
-    public BinaryOperation getRightChildOperation() {
+    public TreeBinaryOperation getRightChildOperation() {
         return rightChildOperation;
     }
 
-    public void setRightChildOperation( BinaryOperation rightChildOperation ) {
+    public void setRightChildOperation( TreeBinaryOperation rightChildOperation ) {
         this.rightChildOperation = rightChildOperation;
     }
 
     @StartNode
-    private BinaryOperation parentOperation;
+    private TreeBinaryOperation parentOperation;
 
     @EndNode
-    private BinaryOperation rightChildOperation;
+    private TreeBinaryOperation rightChildOperation;
 }

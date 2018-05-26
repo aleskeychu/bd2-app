@@ -27,12 +27,20 @@ public class CompositeRoot {
         this.name = name;
     }
 
-    public BinaryOperation getRootLevelOperation() {
+    public TreeBinaryOperation getRootLevelOperation() {
         return rootLevelOperation;
     }
 
-    public void setRootLevelOperation( BinaryOperation rootLevelOperation ) {
+    public void setRootLevelOperation( TreeBinaryOperation rootLevelOperation ) {
         this.rootLevelOperation = rootLevelOperation;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription( String description ) {
+        this.description = description;
     }
 
     @Id
@@ -40,11 +48,15 @@ public class CompositeRoot {
     @JsonProperty
     private Long compositeRuleId;
 
+    @Relationship( type = "ToUpperLevelOperation" )
+    @JsonProperty
+    private TreeBinaryOperation rootLevelOperation;
+
     @Property
     @JsonProperty
     private String name;
 
-    @Relationship(type="ToUpperLevelOperation")
+    @Property
     @JsonProperty
-    private BinaryOperation rootLevelOperation;
+    private String description;
 }

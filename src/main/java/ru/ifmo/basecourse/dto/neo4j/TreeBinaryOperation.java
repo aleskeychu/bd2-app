@@ -8,8 +8,8 @@ import org.neo4j.ogm.annotation.*;
  * Date: 25-May-18.
  */
 
-@NodeEntity
-public class BinaryOperation {
+@NodeEntity( label = "BinaryOperation" )
+public class TreeBinaryOperation {
 
     public Long getOperationNodeId() {
         return operationNodeId;
@@ -51,12 +51,20 @@ public class BinaryOperation {
         this.binaryOperation = binaryOperation;
     }
 
-    public LeftOperandRel getLeftOperand() {
+    public TreeBinaryOperation getLeftOperand() {
         return leftOperand;
     }
 
-    public RightOperandRel getRightOperand() {
+    public void setLeftOperand( TreeBinaryOperation leftOperand ) {
+        this.leftOperand = leftOperand;
+    }
+
+    public TreeBinaryOperation getRightOperand() {
         return rightOperand;
+    }
+
+    public void setRightOperand( TreeBinaryOperation rightOperand ) {
+        this.rightOperand = rightOperand;
     }
 
     @Id
@@ -81,8 +89,8 @@ public class BinaryOperation {
     private LogicalOperation binaryOperation;
 
     @Relationship( type = "toLeftOperand", direction = "OUTGOING" )
-    private LeftOperandRel leftOperand;
+    private TreeBinaryOperation leftOperand;
 
     @Relationship( type = "toRightOperand", direction = "OUTGOING" )
-    private RightOperandRel rightOperand;
+    private TreeBinaryOperation rightOperand;
 }
