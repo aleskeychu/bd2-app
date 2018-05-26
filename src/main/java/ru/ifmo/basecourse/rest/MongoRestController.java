@@ -135,7 +135,7 @@ public class MongoRestController {
 
     @RequestMapping( "/addDto" )
     @POST
-    public ResponseEntity<String> addDto( @RequestParam String name, @RequestParam String[] fields) {
+    public ResponseEntity<String> addDto( @RequestParam String name, @RequestParam(name = "fields[]") String[] fields) {
         if (name.isEmpty() ||fields.length < 1) {
             return ResponseEntity.badRequest().body("invalid input");
         }
