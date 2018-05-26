@@ -13,16 +13,16 @@ import java.util.List;
 @Document(collection = "dtos")
 public class DtoDeclaration {
 
-    public DtoDeclaration( List<DtoField> fields, String name ) {
+    public DtoDeclaration( List<String> fields, String name ) {
         this.fields = fields;
         this.name = name;
     }
 
-    public List<DtoField> getFields() {
+    public List<String> getFields() {
         return fields;
     }
 
-    public void setFields( List<DtoField> fields ) {
+    public void setFields( List<String> fields ) {
         this.fields = fields;
     }
 
@@ -45,7 +45,7 @@ public class DtoDeclaration {
     @Id
     private String id;
 
-    private List<DtoField> fields;
+    private List<String> fields;
 
     private String name;
 }
