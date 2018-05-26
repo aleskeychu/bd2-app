@@ -13,9 +13,9 @@ import java.util.List;
 @Document(collection = "dtos")
 public class DtoDeclaration {
 
-    public DtoDeclaration( List<String> fields, String name ) {
+    public DtoDeclaration( List<String> fields, String dtoName ) {
         this.fields = fields;
-        this.name = name;
+        this.dtoName = dtoName;
     }
 
     public List<String> getFields() {
@@ -26,12 +26,12 @@ public class DtoDeclaration {
         this.fields = fields;
     }
 
-    public String getName() {
-        return name;
+    public String getdtoName() {
+        return dtoName;
     }
 
-    public void setName( String name ) {
-        this.name = name;
+    public void setdtoName( String dtoName ) {
+        this.dtoName = dtoName;
     }
 
     public String getId() {
@@ -47,5 +47,5 @@ public class DtoDeclaration {
 
     private List<String> fields;
 
-    private String name;
+    private String dtoName;
 }
