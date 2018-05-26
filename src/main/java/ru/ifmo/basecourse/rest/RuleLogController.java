@@ -20,8 +20,8 @@ public class RuleLogController {
     private static final int size = 10;
 
     @RequestMapping(value = "/getAll", params = {"page", "ruleId"}, method = RequestMethod.GET)
-    public PagingCassandraDto getAll(@RequestParam("page") String page,
-                                     @RequestParam("ruleId") Long ruleId) {
+    public PagingCassandraDto getAll(@RequestParam(value = "page", required = false) String page,
+                                     @RequestParam(value = "ruleId", required = false) Long ruleId) {
         List<RuleLog> logs = new ArrayList<>();
         String nextPage = ruleLogRepository.findAllByRuleId(logs, ruleId, page);
         return new PagingCassandraDto(nextPage, logs);
