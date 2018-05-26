@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.data.neo4j.transaction.Neo4jTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -20,7 +21,7 @@ import java.util.List;
 
 @EnableNeo4jRepositories
 @EnableTransactionManagement
-//@EnableMongoRepositories
+@EnableMongoRepositories
 //@EnableCassandraRepositories
 @SpringBootApplication
 public class BasecourseApplication {

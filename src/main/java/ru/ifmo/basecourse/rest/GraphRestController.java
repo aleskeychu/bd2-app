@@ -28,11 +28,9 @@ import java.util.*;
 public class GraphRestController {
 
     @Inject
-    public GraphRestController( OperationRepository operationRepository, CompositeRuleRepository ruleRepository,
-            SessionFactory sessionFactory ) {
+    public GraphRestController( OperationRepository operationRepository, CompositeRuleRepository ruleRepository ) {
         this.repository = operationRepository;
         this.ruleRepository = ruleRepository;
-        this.sessionFactory = sessionFactory;
     }
 
     @RequestMapping( "/getAll" )
@@ -85,6 +83,17 @@ public class GraphRestController {
         return ResponseEntity.ok( "ok" );
     }
 
+    @RequestMapping(value = "/remove")
+    @POST
+    public ResponseEntity<String> removeRule(@RequestParam Long id) {
+        if (id <= 0) {
+            return ResponseEntity.badRequest().body( "incorrect ID" );
+        }
+        ruleRepository.deleteById( id );
+        return ResponseEntity.ok( "ok" );
+
+    }
+
     private TreeBinaryOperation buildOperation( CompositeRuleObject ruleObject ) {
         TreeBinaryOperation operation = new TreeBinaryOperation();
         operation.setName( ruleObject.getName() );
@@ -107,7 +116,5 @@ public class GraphRestController {
     private OperationRepository repository;
 
     private CompositeRuleRepository ruleRepository;
-
-    private SessionFactory sessionFactory;
 
 }
