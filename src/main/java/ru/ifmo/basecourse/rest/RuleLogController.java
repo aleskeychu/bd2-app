@@ -21,14 +21,9 @@ public class RuleLogController {
 
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public PagingCassandraDto getAll(@RequestParam(name = "page", /*defaultValue = "",*/ required = false) String page,
-                                     @RequestParam(name = "ruleId", /*defaultValue = "",*/ required = false) String ruleId) {
-        Long id = null;
-        if (page.isEmpty()) page = null;
-        if (!ruleId.isEmpty()) {
-            id = Long.valueOf(ruleId);
-        }
+                                     @RequestParam(name = "ruleId", /*defaultValue = "",*/ required = false) Long ruleId) {
         List<RuleLog> logs = new ArrayList<>();
-        String nextPage = ruleLogRepository.findAllByRuleId(logs, id, page);
+        String nextPage = ruleLogRepository.findAllByRuleId(logs, ruleId, page);
         return new PagingCassandraDto(nextPage, logs);
     }
 
