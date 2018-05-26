@@ -20,10 +20,15 @@ public class RuleLogController {
     private static final int size = 10;
 
     @RequestMapping(value = "/getAll", params = {"page", "ruleId"}, method = RequestMethod.GET)
-    public PagingCassandraDto getAll(@RequestParam(name = "page", required = false) String page,
-                                     @RequestParam(name = "ruleId", required = false) Long ruleId) {
+    public PagingCassandraDto getAll(@RequestParam(name = "page", defaultValue = "") String page,
+                                     @RequestParam(name = "ruleId", defaultValue = "") String ruleId) {
+        Long id = null;
+        if (page.isEmpty()) page = null;
+        if (!ruleId.isEmpty()) {
+            id = Long.valueOf(ruleId);
+        }
         List<RuleLog> logs = new ArrayList<>();
-        String nextPage = ruleLogRepository.findAllByRuleId(logs, ruleId, page);
+        String nextPage = ruleLogRepository.findAllByRuleId(logs, id, page);
         return new PagingCassandraDto(nextPage, logs);
     }
 
