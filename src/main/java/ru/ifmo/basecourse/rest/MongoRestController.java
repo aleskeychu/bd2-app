@@ -140,12 +140,12 @@ public class MongoRestController {
             return ResponseEntity.badRequest().body("invalid input");
         }
         String[] fields = fieldString.split(",");
-        List<DtoField> fieldsList = new ArrayList<>(  );
+        List<String> fieldsList = new ArrayList<>(  );
         for ( String field : fields ) {
             if (field == null || field.isEmpty()) {
                 return ResponseEntity.badRequest().body("invalid input");
             }
-            fieldsList.add(new DtoField( field ));
+            fieldsList.add(field);
         }
 
         DtoDeclaration dto = new DtoDeclaration( fieldsList, name );
