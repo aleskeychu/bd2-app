@@ -17,7 +17,7 @@ public class RuleLogKey implements Serializable {
     @PrimaryKeyColumn(ordinal=1, type=PrimaryKeyType.CLUSTERED)
     private String name;
     @PrimaryKeyColumn(ordinal=2, type=PrimaryKeyType.CLUSTERED)
-    private Date timestamp;
+    private Date when;
     @PrimaryKeyColumn(ordinal=3, type=PrimaryKeyType.CLUSTERED)
     private String validatee;
     @PrimaryKeyColumn(ordinal=4, type=PrimaryKeyType.CLUSTERED)
@@ -35,8 +35,8 @@ public class RuleLogKey implements Serializable {
         return name;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public Date getwhen() {
+        return when;
     }
 
     public String getValidatee() {
@@ -62,7 +62,7 @@ public class RuleLogKey implements Serializable {
         RuleLogKey that = (RuleLogKey) o;
         return Objects.equals(getRuleId(), that.getRuleId()) &&
                 Objects.equals(getName(), that.getName()) &&
-                Objects.equals(getTimestamp(), that.getTimestamp()) &&
+                Objects.equals(getwhen(), that.getwhen()) &&
                 Objects.equals(getValidatee(), that.getValidatee()) &&
                 Objects.equals(getId(), that.getId()) &&
                 Objects.equals(isComposite, that.isComposite) &&
@@ -72,6 +72,6 @@ public class RuleLogKey implements Serializable {
     @Override
     public int hashCode() {
 
-        return Objects.hash(getRuleId(), getName(), getTimestamp(), getValidatee(), getId(), isComposite, getResult());
+        return Objects.hash(getRuleId(), getName(), getwhen(), getValidatee(), getId(), isComposite, getResult());
     }
 }

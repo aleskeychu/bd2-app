@@ -12,10 +12,10 @@ import java.util.UUID;
 public class RuleLog {
 
     @JsonCreator
-    public RuleLog(Long ruleId, String name, Date timestamp, String validatee, UUID id, Boolean isComposite, Boolean result) {
+    public RuleLog(Long ruleId, String name, Date when, String validatee, UUID id, Boolean isComposite, Boolean result) {
         this.ruleId = ruleId;
         this.name = name;
-        this.timestamp = timestamp;
+        this.when = when;
         this.validatee = validatee;
         this.id = id;
         this.isComposite = isComposite;
@@ -29,7 +29,7 @@ public class RuleLog {
     @Column
     private String name;
     @Column
-    private Date timestamp;
+    private Date when;
     @Column
     private String validatee;
     @Column
@@ -63,12 +63,12 @@ public class RuleLog {
         this.name = name;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public Date getwhen() {
+        return when;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public void setwhen(Date when) {
+        this.when = when;
     }
 
     public String getValidatee() {
