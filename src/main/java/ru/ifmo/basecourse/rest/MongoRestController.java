@@ -135,11 +135,11 @@ public class MongoRestController {
 
     @RequestMapping( "/addDto" )
     @POST
-    public ResponseEntity<String> addDto( @RequestParam String name, @RequestParam(name = "fields[]") String[] fields) {
-        if (name.isEmpty() ||fields.length < 1) {
+    public ResponseEntity<String> addDto( @RequestParam String name, @RequestParam(name = "fields") String fieldString) {
+        if (name.isEmpty() ||fieldString.length()< 1) {
             return ResponseEntity.badRequest().body("invalid input");
         }
-
+        String[] fields = fieldString.split(",");
         List<DtoField> fieldsList = new ArrayList<>(  );
         for ( String field : fields ) {
             if (field == null || field.isEmpty()) {
