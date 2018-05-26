@@ -4,7 +4,6 @@ import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import ru.ifmo.basecourse.dto.mongo.DtoDeclaration;
 import ru.ifmo.basecourse.dto.mongo.ValidationRule;
 
 import java.util.List;
@@ -15,7 +14,13 @@ import java.util.List;
  */
 public interface ValidationRuleRepository extends MongoRepository<ValidationRule, String> {
 
-    Page<ValidationRule> findAllByValidatee( ObjectId validatee, Pageable pageable );
+    List<ValidationRule> findAllByValidatee( ObjectId validatee );
 
-    Page<ValidationRule> findAllByName(String name, Pageable pageable);
+    List<ValidationRule> findAllByName( String name );
+
+    ValidationRule findByRuleId( Long ruleId );
+
+    void deleteByRuleId( Long ruleId );
+
+    void deleteByValidatee( ObjectId validatee );
 }
