@@ -54,7 +54,7 @@ public class PagingCassandraRepositoryImpl implements PagingCassandraRepository 
         if (ruleId != null) {
             query += " where ruleid=" + ruleId;
         }
-        Statement st = new SimpleStatement("select * from rulelog where ruleid=" + ruleId);
+        Statement st = new SimpleStatement(query);
         st.setFetchSize(10);
         if (page != null && !page.isEmpty()) {
             st.setPagingState(PagingState.fromString(page));
