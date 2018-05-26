@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import ru.ifmo.basecourse.dto.neo4j.BinaryOperation;
 import ru.ifmo.basecourse.repository.OperationRepository;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @EnableNeo4jRepositories
 //@EnableMongoRepositories
-//@EnableCassandraRepositories
+@EnableCassandraRepositories
 @SpringBootApplication
 public class BasecourseApplication {
 
