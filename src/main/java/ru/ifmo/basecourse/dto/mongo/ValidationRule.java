@@ -19,12 +19,12 @@ public class ValidationRule {
         this.validatee = validatee;
     }
 
-    public String getId() {
-        return id;
+    public String getRuleId() {
+        return ruleId;
     }
 
     public void setId( String id ) {
-        this.id = id;
+        this.ruleId = id;
     }
 
     public String getName() {
@@ -60,7 +60,7 @@ public class ValidationRule {
     }
 
     @Id
-    private String id;
+    private String ruleId;
 
     private String name;
 
