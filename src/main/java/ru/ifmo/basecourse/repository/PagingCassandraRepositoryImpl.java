@@ -49,6 +49,7 @@ public class PagingCassandraRepositoryImpl implements PagingCassandraRepository 
         }
         list.clear();
         Session session = cluster.connect();
+        session.execute(new SimpleStatement("use rules;"));
         String query = "select * from rulelog";
         if (ruleId != null) {
             query += " where ruleid=" + ruleId;
