@@ -13,6 +13,11 @@ import java.util.List;
 @Document(collection = "dtos")
 public class DtoDeclaration {
 
+    public DtoDeclaration( List<DtoField> fields, String name ) {
+        this.fields = fields;
+        this.name = name;
+    }
+
     public List<DtoField> getFields() {
         return fields;
     }

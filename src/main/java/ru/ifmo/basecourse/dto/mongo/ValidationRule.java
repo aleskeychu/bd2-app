@@ -12,20 +12,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document( collection = "rules" )
 public class ValidationRule {
 
+    public ValidationRule( String name, String description, String function, ObjectId validatee ) {
+        this.name = name;
+        this.description = description;
+        this.function = function;
+        this.validatee = validatee;
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId( String id ) {
         this.id = id;
-    }
-
-    public Long getRuleId() {
-        return ruleId;
-    }
-
-    public void setRuleId( Long ruleId ) {
-        this.ruleId = ruleId;
     }
 
     public String getName() {
@@ -62,8 +61,6 @@ public class ValidationRule {
 
     @Id
     private String id;
-
-    private Long ruleId;
 
     private String name;
 
