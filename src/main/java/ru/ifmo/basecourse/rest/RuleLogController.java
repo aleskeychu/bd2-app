@@ -19,7 +19,7 @@ public class RuleLogController {
 
     private static final int size = 10;
 
-    @RequestMapping(value = "/getAll", params = {"page", "ruleId"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public PagingCassandraDto getAll(@RequestParam(name = "page", /*defaultValue = "",*/ required = false) String page,
                                      @RequestParam(name = "ruleId", /*defaultValue = "",*/ required = false) String ruleId) {
         Long id = null;
