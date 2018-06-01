@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface ValidationRuleRepository extends MongoRepository<ValidationRule, String> {
 
+    Page<ValidationRule> findAll( Pageable pageable );
+
     List<ValidationRule> findAllByValidatee( ObjectId validatee );
 
     List<ValidationRule> findAllByName( String name );

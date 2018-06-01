@@ -12,8 +12,8 @@ import ru.ifmo.basecourse.repository.ValidationRuleRepository;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Author: siziyman
@@ -128,7 +128,14 @@ public class MongoRestController {
             return ResponseEntity.badRequest().body( "invalid input" );
         }
 
-        ValidationRule rule = new ValidationRule( name, description, function, new ObjectId( objectId ) );
+        ObjectId validatee = null;
+        try {
+            validatee = new ObjectId( objectId );
+        }
+        catch ( Exception e ) {
+            return ResponseEntity.badRequest().body( "invalid objectId" );
+        }
+        ValidationRule rule = new ValidationRule( name, description, function, validatee );
         ValidationRule insert = validationRuleRepository.insert( rule );
         return ResponseEntity.ok( "ok" );
     }
@@ -139,15 +146,13 @@ public class MongoRestController {
         if (name.isEmpty() ||fieldString.length()< 1) {
             return ResponseEntity.badRequest().body("invalid input");
         }
-        String[] fields = fieldString.split(",");
-        List<String> fieldsList = new ArrayList<>(  );
-        for ( String field : fields ) {
-            if (field == null || field.isEmpty()) {
-                return ResponseEntity.badRequest().body("invalid input");
-            }
-            fieldsList.add(field);
-        }
 
+        String[] fields = fieldString.split(",");
+        List<String> strings = Arrays.asList( fields );
+        List<String> fieldsList = strings.stream().filter( it -> !it.isEmpty() ).collect( Collectors.toList() );
+        if (fieldsList.isEmpty()) {
+            return ResponseEntity.badRequest().body( "invalid field set" );
+        }
         DtoDeclaration dto = new DtoDeclaration( fieldsList, name );
         DtoDeclaration insert = dtoDeclarationRepository.insert( dto );
         return ResponseEntity.ok( "ok" );

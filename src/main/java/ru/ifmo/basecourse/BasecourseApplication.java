@@ -4,12 +4,10 @@ import org.neo4j.ogm.config.ClasspathConfigurationSource;
 import org.neo4j.ogm.config.Configuration;
 import org.neo4j.ogm.session.LoadStrategy;
 import org.neo4j.ogm.session.SessionFactory;
-import org.neo4j.ogm.transaction.TransactionManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.data.neo4j.transaction.Neo4jTransactionManager;
@@ -24,8 +22,6 @@ import java.util.List;
 @EnableTransactionManagement
 @EnableMongoRepositories
 //@EnableCassandraRepositories
-//@EnableMongoRepositories
-@EnableCassandraRepositories
 @SpringBootApplication
 public class BasecourseApplication {
 
