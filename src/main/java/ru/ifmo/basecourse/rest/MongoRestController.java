@@ -65,12 +65,13 @@ public class MongoRestController {
 
     @RequestMapping( "/deleteRule" )
     @POST
-    public ResponseEntity<String> deleteRuleById( @RequestParam Long ruleId ) {
-        if ( ruleId <= 0 ) {
+    public ResponseEntity<String> deleteRuleById( @RequestParam String ruleId ) {
+        if ( ruleId == null || ruleId.isEmpty() ) {
             return ResponseEntity.badRequest().body( "incorrect ID" );
         }
-        if ( validationRuleRepository.findByRuleId( ruleId ) != null ) {
-            validationRuleRepository.deleteByRuleId( ruleId );
+        ObjectId objId = new ObjectId(ruleId);
+        if ( validationRuleRepository.findByRuleId( objId ) != null ) {
+            validationRuleRepository.deleteByRuleId( objId );
             return ResponseEntity.ok( "ok" );
         }
         return ResponseEntity.notFound().build();

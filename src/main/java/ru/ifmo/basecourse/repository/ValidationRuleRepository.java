@@ -20,9 +20,9 @@ public interface ValidationRuleRepository extends MongoRepository<ValidationRule
 
     List<ValidationRule> findAllByName( String name );
 
-    ValidationRule findByRuleId( Long ruleId );
+    ValidationRule findByRuleId( ObjectId ruleId );
 
-    void deleteByRuleId( Long ruleId );
+    void deleteByRuleId( ObjectId ruleId );
 
     void deleteByValidatee( ObjectId validatee );
 }
