@@ -1,0 +1,22 @@
+//docker run -d -p9042:9042 cassandra
+
+CREATE KEYSPACE Rules WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+
+USE Rules;
+
+CREATE TABLE ruleLog (
+	ruleId bigint,
+	name text,
+	when timestamp,
+	validatee text,
+	id uuid,
+	isComposite boolean,
+	result boolean,
+	PRIMARY KEY (ruleId, name, when, id, validatee, isComposite, result)
+);
+
+INSERT INTO ruleLog(ruleId, name, when, validatee, id, isComposite, result) VALUES(1, 'divislbe by 2', dateof(now()), '[{value: 6}]', uuid(), false, true);
+
+INSERT INTO ruleLog(ruleId, name, when, validatee, id, isComposite, result) VALUES(2, 'positive', dateof(now()), '[{value: 6}]', uuid(), false, true);
+
+INSERT INTO ruleLog(ruleId, name, when, validatee, id, isComposite, result) VALUES(1, 'AND', dateof(now()), '[{val: true}, {val: true}]', uuid(), true, true);

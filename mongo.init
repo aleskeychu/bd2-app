@@ -1,0 +1,64 @@
+// docker run -d -p27017:27017 mongo
+
+db.createCollection("rules", { 
+	validator: {
+		$jsonSchema: {
+			bsonType: "object",
+			required: ["ruleId", "name", "description", "function","validatee"],
+			properties: {
+				ruleId: {
+					type: "number",
+					minimum: 0
+				},
+				name: {
+					type: "string"
+				},
+				description: {
+					type: "string"
+				},
+				function: {
+					type: "string"
+				},
+				validatee: {
+					bsonType: "objectId"
+				}
+			}
+		}
+	}
+});
+
+db.createCollection("dtos", {
+	validator: {
+		$jsonSchema: {
+			bsonType: "object",
+			required: ["dtoName", "fields"],
+			properties: {
+				dtoName: {
+					type: "string"
+				},
+				fields: {
+					type: "array"
+				}
+			}
+		}
+	}
+});
+
+db.dtos.insert({dtoId: 1, dtoName: "integer", fields: ["value"]});
+db.dtos.find({});
+db.rules.insert({ruleId: 1, name: "divisable by 2", description: "test if divisible by 2", function: "value % 2 == 0", validatee: "5aed700e7d0ca7e9f5c3b5ec"});
+db.rules.insert({ruleId: 2, name: "positive", description: "more than 0", function: "value > 0", validatee: ObjectId("5aed700e7d0ca7e9f5c3b5ec")});
+db.rules.insert({ruleId: 3, name: "less than -100", description: "less than -100", function: "value < -100", validatee: ObjectId("5aed700e7d0ca7e9f5c3b5ec")});
+
+
+db.rules.aggregate([
+   {
+     $lookup:
+       {
+         from: "dtos",
+         localField: "validatee",
+         foreignField: "_id",
+         as: "dto"
+       }
+  }
+])

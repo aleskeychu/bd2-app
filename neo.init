@@ -1,0 +1,26 @@
+// docker run -d -p7687:7687 -p7474:7474 --env=NEO4J_AUTH=none neo4j
+
+CREATE (root:CompositeRoot {compositeRuleId: 1, name: '', desc: 'whatever description'})-[:ToUpperLevelOperation]->(op:BinaryOperation {operationNodeId: 1, isRoot: true, operation:'AND', name:'&'});
+
+match (op:BinaryOperation{isRoot: true}) CREATE (op)-[r:toLeftOperand]->(n:BinaryOperation{ operationNodeId:2, ruleId:1,  isRoot: false, operation: null, name: 'divisible by 2' });
+
+match (op:BinaryOperation{isRoot: true}) CREATE (op)-[r:toRightOperand]->(n:BinaryOperation{operationNodeId:3, ruleId:null, isRoot: false, operation: 'OR', name: 'OR'});
+
+match (op:BinaryOperation{operationNodeId: 3}) CREATE (op)-[r:toLeftOperand]->(n:BinaryOperation{operationNodeId:4, ruleId:2, isRoot: false, operation: null, name: 'positive'});
+
+match (op:BinaryOperation{operationNodeId: 3}) CREATE (op)-[r:toRightOperand]->(n:BinaryOperation{operationNodeId:5, ruleId:3, isRoot: false, operation: null, name: 'less than -100'});
+
+create (n:CompositeRoot{compositeRuleId:2, name:'courseWork', desc:"i don't want to die"})-[r:ToUpperLevelOperation]->(op:BinaryOperation{ruleId:null, operationNodeId:6, operation:"AND", name:"&", isRoot:true})
+
+match (op:BinaryOperation{operationNodeId:6}) CREATE (op)-[r:toLeftOperand]->(n:BinaryOperation{ operationNodeId:7, ruleId:null,  isRoot: false, operation: "AND", name: '&' });
+
+match (op:BinaryOperation{operationNodeId:6}) CREATE (op)-[r:toRightOperand]->(n:BinaryOperation{ operationNodeId:8, ruleId:null,  isRoot: false, operation: "AND", name: '&' });
+
+match (op:BinaryOperation{operationNodeId: 7}) CREATE (op)-[r:toLeftOperand]->(n:BinaryOperation{operationNodeId:9, ruleId:5, isRoot: false, operation: null, name: 'laptop asus or lenovo});
+
+match (op:BinaryOperation{operationNodeId: 7}) CREATE (op)-[r:toRightOperand]->(n:BinaryOperation{operationNodeId:10, ruleId:6, isRoot: false, operation: null, name: 'peopleInGroup less than 4'});
+
+
+match (op:BinaryOperation{operationNodeId: 8}) CREATE (op)-[r:toLeftOperand]->(n:BinaryOperation{operationNodeId:11, ruleId:7, isRoot: false, operation: null, name: 'people by peopleInGroup equals half'});
+
+match (op:BinaryOperation{operationNodeId: 8}) CREATE (op)-[r:toRightOperand]->(n:BinaryOperation{operationNodeId:12, ruleId:4, isRoot: false, operation: null, name: 'people less than 3'});
